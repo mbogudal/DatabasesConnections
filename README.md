@@ -2,7 +2,7 @@
 
 Working on Linux and Windows.
 
-This application is created for making reports from sql databases. It must be started from command lineand requires 4 arguments.
+This application is created for making reports from sql databases. It must be started from command line and requires 4 arguments.
 - database engine (oracle, postgres).
 - database addres / name.
 - user name.
