@@ -1,3 +1,8 @@
+/*
+Author: Mikolaj Bogudal
+Date: 09-05-2017
+*/
+
 import java.sql.*;
 
 public class JdbcConn{
