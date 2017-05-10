@@ -1,6 +1,7 @@
 # DatabasesConnections
 
 Working on Linux and Windows.
+Application requires jdbc drivers.
 
 This application is created for making reports from sql databases. It must be started from command line and requires 4 arguments.
 - database engine (oracle, postgres).
