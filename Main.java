@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Main{
 
@@ -15,9 +16,6 @@ public class Main{
 
         Scanner input = new Scanner(System.in);
         String strInput = "";
-        FileOperations queryToFile = new FileOperations(); // deklaruje obiekt do operacji na plikach
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
-        Date date;
 
         QueryExecutor query = new QueryExecutor();
 
@@ -41,14 +39,13 @@ public class Main{
 
             if(!strInput.equals("")){
 
-                date = new Date(); //pobieram aktualna date
-
-                query.execute(strInput);
-
-                queryToFile.dir = dateFormat.format(date) +".txt";
-                if(!query.result.equals(""))queryToFile.saveFile(query.scheme+query.result); //zapis do pliku jesli zapytanie cokolwiek zwrocilo
+                query.execute(strInput);//wykonuje zapytanie
+                
+                OutputTypeSelector select = new OutputTypeSelector(query);//zrzucam wynik do pliku
+                
+                if(select.strInput.equals("\\q")) break;//sprawdzam czy uzytkownik nie chcial wyjsc z programu przed zapisem wyniku do pliku
             }
-
+            	System.out.println("Wpisz zapytanie");
             System.out.print("=> ");//takie tam zeby bylo ladniej
 
             strInput = input.nextLine();
