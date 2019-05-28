@@ -5,17 +5,19 @@ Date: 09-05-2017
 
 import java.sql.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QueryExecutor{
 
-    String result = "";
-    String scheme = "Scheme: ";
+    public List<String> result = new ArrayList();
+    public List<String> scheme = new ArrayList();
     Connection conn;
 
     void execute(String query){
 
-        int type;
-        result = "";
-        scheme = "Scheme: ";
+        scheme.removeAll(scheme);
+        result.removeAll(result);
 
         try{
 
@@ -27,10 +29,10 @@ public class QueryExecutor{
 
             for(int nCol = 1; nCol <= rSMD.getColumnCount(); nCol += 1) { //pobieram nazwy column
 
-                if(nCol > 1) scheme += ", ";
-                scheme += rSMD.getColumnName(nCol);
+                
+                scheme.add(rSMD.getColumnName(nCol));
 
-            } scheme += String.format("%n"); //dodawanie na koncu zmiennej znaku nowej lini niezaleznie od systemu operacyjnego.
+            }  
 
             while(rS.next()){
 
@@ -38,15 +40,10 @@ public class QueryExecutor{
 
                 for(int nCol = 1; nCol <= rSMD.getColumnCount(); nCol += 1) {
 
-                    if(nCol > 1) result += ", ";
+                    result.add(rS.getString(nCol));
 
-                    type = rSMD.getColumnType(nCol);//pobranie typu kolumny
-
-                    if(type == Types.VARCHAR || type == Types.CHAR ) result += rS.getString(nCol);
-                    else result += rS.getLong(nCol);
                 }
 
-                result += String.format("%n");
             }
 
         } catch (SQLException exception){

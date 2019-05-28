@@ -1,26 +1,6 @@
-/*
-Author: Mikolaj Bogudal
-Date: 09-05-2017
-*/
+import java.util.List;
 
-import java.io.*;
-
-public class FileOperations{
-
-    String dir;
-
-    void saveFile( String data ){
-
-        try(  PrintWriter out = new PrintWriter( dir )  ){
-
-            out.println( data );
-
-        }catch( FileNotFoundException exception ){
-
-            exception.printStackTrace();
-
-        }
-
-    }
-
+public interface FileOperations {
+	public void write(String fileName, List<String> scheme, List<String> result);
+	public void read();
 }
